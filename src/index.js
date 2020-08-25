@@ -1,0 +1,206 @@
+function loadConfig() {
+  if (localStorage.getItem('darkMode') == 1) {
+    document.documentElement.dataset.theme = 'dark';
+  }
+}
+loadConfig();
+
+function toggleDarkMode() {
+  if (localStorage.getItem('darkMode') == 1) {
+    localStorage.setItem('darkMode', 0);
+    delete document.documentElement.dataset.theme;
+  } else {
+    localStorage.setItem('darkMode', 1);
+    document.documentElement.dataset.theme = 'dark';
+  }
+}
+
+// +-*/のテストデータ生成範囲を返却
+function getLevels(level) {
+  switch(level) {
+    case 1: return [ 8,2,      8, 2,    0,0,   0,0];
+    case 2: return [28,6,     28, 6,    8,2,   0,0];
+    case 3: return [38,11,    38,11,    8,2,   8,2];
+    case 4: return [38,11,    38,11,   12,2,  16,4];
+    case 5: return [99,50,    99,50,   16,4,  20,6];
+    case 6: return [99,50,    99,50,   14,6,  20,8];
+    default:return [388,111, 388,111,  12,8,  20,11];
+  }
+}
+
+function generateData() {
+  var age = document.getElementById('age').selectedIndex;
+  var type = document.getElementById('type').selectedIndex - 2;
+  var levels = getLevels(age);
+  for (var i=0; i<20; i++) {
+    var problem = document.getElementById('problem').cloneNode(true);
+    var a_ = problem.getElementsByClassName('a')[0];
+    var b_ = problem.getElementsByClassName('b')[0];
+    // var c_ = problem.getElementsByClassName('c')[0];
+    var x_ = problem.getElementsByClassName('x')[0];
+    var y_ = problem.getElementsByClassName('y')[0];
+    var z_ = problem.getElementsByClassName('z')[0];
+    let a, b, c, x, s;
+    if (type < 0) {
+      if (age == 1) {
+        s = Math.floor(Math.random() * 2);
+      } else if (age == 2) {
+        s = Math.floor(Math.random() * 3);
+      } else {
+        s = Math.floor(Math.random() * 4);
+      }
+    } else {
+      s = type;
+    }
+    switch(s) {
+      case 0:
+        a = Math.floor(Math.random() * levels[0] + levels[1]);
+        b = Math.floor(Math.random() * levels[0] + levels[1]);
+        c = a + b;
+        x = '＋';
+        break;
+      case 1:
+        b = Math.floor(Math.random() * levels[2] + levels[3]);
+        c = Math.floor(Math.random() * levels[2] + levels[3]);
+        a = b + c;
+        x = '−';
+        break;
+      case 2:
+        a = Math.floor(Math.random() * levels[4] + levels[5]);
+        b = Math.floor(Math.random() * levels[4] + levels[5]);
+        c = a * b;
+        x = '×';
+        break;
+      case 3:
+        b = Math.floor(Math.random() * levels[6] + levels[7]);
+        c = Math.floor(Math.random() * levels[6] + levels[7]);
+        a = b * c;
+        x = '÷';
+        break;
+      default:
+        console.log('error');
+    }
+    var vals = [a, b, c];
+    // vals[Math.floor(Math.random() * 3)] = '□';
+    a_.innerText = vals[0];
+    b_.innerText = vals[1];
+    // c_.innerText = vals[2];
+    x_.innerText = x;
+    y_.innerText = '＝';
+    z_.innerText = c;
+    problem.removeAttribute('id');
+    document.getElementById('problems').appendChild(problem);
+
+    const nextElement = problem.getElementsByClassName('next')[0];
+    if (nextElement) {
+      nextElement.addEventListener('click', function() {
+        this.parentNode.parentNode.scrollIntoView(true);
+      });
+    }
+  }
+  const firstProblem = document.getElementById('problems').getElementsByClassName('problem')[0];
+  firstProblem.getElementsByTagName('input')[0].focus();
+}
+
+function generateAnswer() {
+  let correctNum = 0;
+  const answers1 = document.getElementById('answers1').getElementsByTagName('TABLE')[0];
+  const answers2 = document.getElementById('answers2').getElementsByTagName('TABLE')[0];
+  const problems = document.getElementById('problems').getElementsByClassName('problem');
+  for (var i=0; i<problems.length; i++) {
+    const answer = problems[i].getElementsByClassName('next')[0].cloneNode(true);
+    const a = answer.getElementsByClassName('a')[0].innerText;
+    const b = answer.getElementsByClassName('b')[0].innerText;
+    // const c = answer.getElementsByClassName('c')[0].innerText;
+    const c = problems[i].getElementsByClassName('pred')[0].value;
+    const x = answer.getElementsByClassName('x')[0].innerText;
+    const y = answer.getElementsByClassName('y')[0].innerText;
+    let z = answer.getElementsByClassName('z')[0].innerText;
+    if (z == c) {
+      z = '◯';
+      correctNum += 1
+    } else {
+      z = '× ' + z;
+    }
+    if (i < problems.length / 2) {
+      var tds = answers1.getElementsByTagName('TR')[i].children;
+    } else {
+      var tds = answers2.getElementsByTagName('TR')[i - 10].children;
+    }
+    tds[0].innerText = a;
+    tds[1].innerText = x;
+    tds[2].innerText = b;
+    tds[3].innerText = y;
+    tds[4].innerText = c;
+    tds[5].innerText = z;
+    tds[5].style.display = 'initial';
+  }
+  document.getElementById('problems').style.display = 'none';
+  document.getElementById('gameEnd').style.display = 'none';
+  document.getElementById('timer').style.display = 'none';
+  return correctNum;
+}
+
+
+
+var problems = document.getElementById('preview').getElementsByClassName('problem');
+for (var i=0; i<problems.length; i++) {
+  const nextElement = problems[i].getElementsByClassName('next')[0];
+  if (nextElement) {
+    nextElement.addEventListener('click', function() {
+      this.parentNode.parentNode.scrollIntoView(true);
+    });
+  }
+}
+
+let playing = true;
+document.getElementById('end').addEventListener('click', function() {
+  playing = false;
+  const correctNum = generateAnswer();
+  const lap = parseFloat(document.getElementById('lap').innerText);
+  const age = document.getElementById('age').selectedIndex;
+  document.getElementById('finalLap').innerText = Math.round(lap);
+  document.getElementById('finalCorrect').innerText = correctNum;
+  document.getElementById('score').innerText = Math.round(1 / (lap + (20 - correctNum) * 5) * correctNum * (age + 10) * 1000);
+  const mofumofu = document.getElementById('mofumofu');
+  mofumofu.style.display = 'block';
+  mofumofu.scrollIntoView(true);
+});
+
+let introduction = document.getElementById('introduction');
+let gameStart = document.getElementById('gameStart');
+document.getElementById('start').addEventListener('click', function() {
+  introduction.style.display = 'none';
+  gameStart.style.display = 'initial';
+  var timer = setInterval(function(){
+    var counter = document.getElementById('counter');
+    var colors = ['skyblue', 'greenyellow', 'violet', 'tomato'];
+    if (parseInt(counter.innerText) > 1) {
+      var t = parseInt(counter.innerText) - 1;
+      counter.style.backgroundColor = colors[t];
+      counter.innerText = t;
+    } else {
+      clearTimeout(timer);
+      counter.style.fontSize = '5rem';
+      counter.style.backgroundColor = colors[0];
+      counter.innerText = 'GO!';
+      var testTimer = setInterval(function(){
+        clearTimeout(testTimer);
+        document.getElementById('countdown').style.display = 'none';
+        counter.innerText = 4;
+        counter.style.backgroundColor = colors[4];
+        generateData();
+        gameEnd.style.display = 'initial';
+        const startTime = Date.now();
+        const lap = document.getElementById('lap');
+        var lapTimer = setInterval(function(){
+          if (playing) {
+            lap.innerText = Math.round((Date.now() - startTime) / 1000);
+          } else {
+            clearTimeout(lapTimer);
+          }
+        }, 100);
+      }, 1000);
+    }
+  }, 1000);
+});
