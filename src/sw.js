@@ -1,7 +1,10 @@
-var CACHE_NAME = '2020-09-13 01:00';
+var CACHE_NAME = '2020-09-29 10:00';
 var urlsToCache = [
   '/type-de-anzan/',
   '/type-de-anzan/index.js',
+  '/type-de-anzan/mp3/incorrect1.mp3',
+  '/type-de-anzan/mp3/end.mp3',
+  '/type-de-anzan/mp3/correct3.mp3',
   'https://marmooo.github.io/fonts/textar-light.woff2',
   'https://marmooo.github.io/fonts/textar-light.woff',
   'https://marmooo.github.io/fonts/textar-light.ttf',

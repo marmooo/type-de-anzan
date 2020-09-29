@@ -2,24 +2,22 @@
 <html lang="ja" class="bg-white">
 <head>
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-142997649-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-142997649-1');
-</script>
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA&#45;142997649&#45;1"></script> -->
+<!-- <script> -->
+<!--   window.dataLayer = window.dataLayer || []; -->
+<!--   function gtag(){dataLayer.push(arguments);} -->
+<!--   gtag('js', new Date()); -->
+<!--  -->
+<!--   gtag('config', 'UA&#45;142997649&#45;1'); -->
+<!-- </script> -->
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>タイプde暗算</title>
-<meta name="description" content="タイピングの算数練習アプリです。小学生から大人まで楽しめます。">
+<meta name="description" content="タイピングの暗算練習アプリです。小学生から大人まで楽しめます。">
 <script>
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/type-de-anzan/sw.js').then(registration => {
-      registration.onupdatefound = function() {
-        registration.update();
-      }
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/type-de-anzan/sw.js');
     });
   }
 </script>
@@ -33,6 +31,7 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
 <style>
+.tile { width:84px; padding-bottom:1rem; line-height:1.1rem; }
 @font-face {
   font-family: textar-light;
   src: url('https://marmooo.github.io/fonts/textar-light.woff2') format('woff2'),
@@ -44,232 +43,159 @@ pre.aa {
   font-size: 1rem;
   display: inline-block;
   text-align: left;
-  line-height: 1;
   font-family: textar-light;
+  line-height: 1.1;
   white-space: pre;
   word-wrap: normal;
-  padding: 0.5rem;
 }
-#answerAA { font-size:0.8rem; }
-
-.problem { margin:auto; }
-.coll { text-align:right; }
-.colr { text-align:left; }
-.edit { display:inline-block; text-align:center; }
-.clear { margin-bottom:1rem; }
-.colc { text-align:center; }
-#gameStart, #gameEnd, #problem, #mofumofu, #problem { display:none; }
-#answers { display:flex; }
-#answers1, #answers2 { padding:0; }
-
-#answers1 table { font-size:0.9rem; margin-left:auto; margin-right:0.5rem; }
-#answers2 table { font-size:0.9rem; margin-right:auto; margin-left:0.5rem; }
-@media (min-width: 360px) {
-  #answers1 table { margin-left:auto; margin-right:1rem; }
-  #answers2 table { margin-right:auto; margin-left:1rem; }
-}
-.ans > .a { display:inline-block; width:1.5rem; }
-.ans > .b { display:inline-block; width:1.5rem; }
-.ans > .c { display:inline-block; width:1.5rem; }
-.ans > .x { display:inline-block; width:1rem; }
-.ans > .y { display:inline-block; width:1rem; }
-.z { display:none;  color:red; padding-left:0.5rem; width:2.5rem; }
-#start { margin-top:1rem; margin-bottom:3rem; }
-#end, #replay { margin-top:3rem; margin-bottom:3rem; }
-#finalLap { font-size:2rem; }
-#finalCorrect { font-size:2rem; }
-#score { font-size:5rem; }
+.eraser { cursor: pointer; }
 #counter {
   font-size:10rem; width:12rem; height:12rem; line-height:12rem; border-radius: 50%;
   background:tomato; margin:auto; }
-.num { font-size:2rem; }
-#timer { position: fixed; bottom: 0; right:0; }
-.pred { width:6rem; text-align:center; }
+.num { font-size: 5rem; }
+@media (max-width: 992px) { .num { font-size: 4rem; } }
+@media (max-width: 576px) { .num { font-size: 2rem; } }
+.calc { font-size:2rem; width:4rem; }
+@media (max-width: 768px) and (orientation: landscape) {
+  .num { font-size: 2rem; }
+  .calc { font-size: 1.5rem; width:3rem; }
+}
+#reply { width:2em; }
 html[data-theme="dark"] { filter: invert(1) hue-rotate(180deg) brightness(1.5); }
 </style>
 </head>
 <body>
 <nav id="header" class="navbar navbar-expand">
   <div class="container">
-    <a class="navbar-brand" href="/type-de-anzan/">タイプde暗算</a>
+    <a class="navbar-brand" href="/type-de-anzan/">
+      タイプde<ruby>暗算<rp>(</rp><rt>あんざん</rt><rp>)</rp></ruby>
+    </a>
     <div class="navbar-nav">
-      <button title="ダークモード切替" onclick="toggleDarkMode()" class="close">🌓</button>
+      <select id="type" class="form-control form-control-sm">
+        <option selected>全部</option>
+        <option>＋</option>
+        <option>ー</option>
+        <option>×</option>
+        <option>÷</option>
+      </select>
+      <select id="grade" class="ml-1 form-control form-control-sm">
+        <option>小1</option>
+        <option>小2</option>
+        <option>小3</option>
+        <option selected>小4</option>
+        <option>小5</option>
+        <option>小6</option>
+        <option>中学〜</option>
+      </select>
+      <button title="ダークモード切替" onclick="toggleDarkMode()" class="ml-2 close">🌓</button>
     </div>
   </div>
 </nav>
-<div class="container mx-auto py-3">
-  <div id="gameStart" class="text-center">
-    <div id="testContent">
-      <div id="countdown">
-        <div id="counter">3</div>
-        <pre id="countdownAA" class="aa">
+<div class="container mx-md-auto pb-4">
+  <div id="gameStart" class="text-center d-none">
+    <div id="countdown">
+      <div id="counter">3</div>
+      <pre class="aa">
 　　　　::･...　　　　...･::
 　　　　 　''':::･,,･:::'''
 　　　 　∩彡⌒ミ∩
 　　　　　 (´・ω・｀)　パワー
 　　　　　 /　　　ﾉ　　充電中…
 　　　　 　しー-Ｊ
-        </pre>
-      </div>
-      <div id="problems"></div>
-      <div id="gameEnd">
-        <button id="end" type="button" class="btn btn-primary btn-lg">クリックして採点する！</button>
-        <br>
-        <pre id="scoreAA" class="aa">
-　　　　　＼＼＼　　　Ｏ
-　　○　　　＼＼＼
-　　　　　　　　＼＼＼
-o　　o　　　　　　　 彡⌒ミ　　　　採点
-　 　　 ﾟ　oﾟ ｡｡＿⊂( ´・ω・)つ 　いくぞー
-　　　　　　　　＼　（　　　）
-　　　　シャー　 ＼.し'~し'　⌒~
-　　　　　　 　　　　＼``＼`＼
-　　⌒~　～ 　　　　　＼　＼ ＼　　　⌒~
-　　　　　　　　　　　　　 ＼⊿`⊿ ～　　⌒~
-        </pre>
-      </div>
-      <div id="mofumofu">
-        <pre id="breakAA" class="aa">
-日　凸　 ▽　∇　Ⅱ
-≡≡≡≡≡≡≡　　彡.⌒.ミ　　おつかれさん
-　Ⅱ　∩　［］ ％ 曰 （´・ω・｀） 　ｷｭｯｷｭｯ
-＿＿＿＿＿＿＿＿_|つ∽と）
-　　 　 　　　　　　　　￣￣￣￣￣
-―――――――――――――
+      </pre>
+    </div>
+  </div>
+  <div id="scorePanel" class="text-center pb-3 d-none">
+    <h3 class="pt-3">
+      <ruby>結果<rp>(</rp><rt>けっか</rt><rp>)</rp></ruby>
+    </h3>
+    <pre class="aa"> n 彡⌒ ミ
+(ﾖ(｀・ω・´)　クリアしたのは・・・
+　Y 　　　つ</pre>
+    <div class="h2 pb-3">
+      <span id="score" class="h1">0</span>
+      <ruby>問<rp>(</rp><rt>もん</rt><rp>)</rp></ruby>！
+    </div>
+    <a id="twitter" target="_blank" href="https://twitter.com/intent/tweet?text=タイプde暗算で遊んだよ!&url=https%3a%2f%2fmarmooo.github.com/type-de-anzan%2f&hashtags=タイプde暗算" class="btn btn-primary btn-lg m-1" role="button">Twitter でつぶやく</a>
+    <button onclick="countdown()" type="button" class="btn btn-primary btn-lg m-1">リスタート</button>
+  </div>
+  <div id="playPanel">
+    <div class="row">
+      <div class="col-sm">
+        <div id="introduction" class="d-flex">
+          <div>
 
-　━┳━ 　 ━┳━
-￣　┻ ￣￣￣┻￣￣￣￣
-        </pre>
-        <div class="jumbotron">
-          <div><span id="finalLap"></span>秒でクリア！ 正答率: <span id="finalCorrect"></span>/20</div>
-          <div>総合得点: <span id="score"></span>/∞</div>
-        </div>
-        <div>
-          <h5>解答</h5>
-          <div id="answers-list" class="row">
-            <div id="answers1" class="col">
-              <table>
-                <tr><td class="a"></td><td class="x"></td><td class="b"></td><td class="y"></td><td class="c"></td><td class="z"></td></tr>
-                <tr><td class="a"></td><td class="x"></td><td class="b"></td><td class="y"></td><td class="c"></td><td class="z"></td></tr>
-                <tr><td class="a"></td><td class="x"></td><td class="b"></td><td class="y"></td><td class="c"></td><td class="z"></td></tr>
-                <tr><td class="a"></td><td class="x"></td><td class="b"></td><td class="y"></td><td class="c"></td><td class="z"></td></tr>
-                <tr><td class="a"></td><td class="x"></td><td class="b"></td><td class="y"></td><td class="c"></td><td class="z"></td></tr>
-                <tr><td class="a"></td><td class="x"></td><td class="b"></td><td class="y"></td><td class="c"></td><td class="z"></td></tr>
-                <tr><td class="a"></td><td class="x"></td><td class="b"></td><td class="y"></td><td class="c"></td><td class="z"></td></tr>
-                <tr><td class="a"></td><td class="x"></td><td class="b"></td><td class="y"></td><td class="c"></td><td class="z"></td></tr>
-                <tr><td class="a"></td><td class="x"></td><td class="b"></td><td class="y"></td><td class="c"></td><td class="z"></td></tr>
-                <tr><td class="a"></td><td class="x"></td><td class="b"></td><td class="y"></td><td class="c"></td><td class="z"></td></tr>
-              </table>
-            </div>
-            <div id="answers2" class="col">
-              <table>
-                <tr><td class="a"></td><td class="x"></td><td class="b"></td><td class="y"></td><td class="c"></td><td class="z"></td></tr>
-                <tr><td class="a"></td><td class="x"></td><td class="b"></td><td class="y"></td><td class="c"></td><td class="z"></td></tr>
-                <tr><td class="a"></td><td class="x"></td><td class="b"></td><td class="y"></td><td class="c"></td><td class="z"></td></tr>
-                <tr><td class="a"></td><td class="x"></td><td class="b"></td><td class="y"></td><td class="c"></td><td class="z"></td></tr>
-                <tr><td class="a"></td><td class="x"></td><td class="b"></td><td class="y"></td><td class="c"></td><td class="z"></td></tr>
-                <tr><td class="a"></td><td class="x"></td><td class="b"></td><td class="y"></td><td class="c"></td><td class="z"></td></tr>
-                <tr><td class="a"></td><td class="x"></td><td class="b"></td><td class="y"></td><td class="c"></td><td class="z"></td></tr>
-                <tr><td class="a"></td><td class="x"></td><td class="b"></td><td class="y"></td><td class="c"></td><td class="z"></td></tr>
-                <tr><td class="a"></td><td class="x"></td><td class="b"></td><td class="y"></td><td class="c"></td><td class="z"></td></tr>
-                <tr><td class="a"></td><td class="x"></td><td class="b"></td><td class="y"></td><td class="c"></td><td class="z"></td></tr>
-              </table>
-            </div>
+            <pre class="aa">　彡 ⌒ ミ
+　(´・ω・`)
+　 ０　　０
+　　∪∪</pre>
+          </div>
+          <div class="ml-2">
+            3<ruby>分<rp>(</rp><rt>ふん</rt><rp>)</rp></ruby>でどれくらい<ruby>解<rp>(</rp><rt>と</rt><rp>)</rp></ruby>けるかな？
           </div>
         </div>
-        <div>
-          <a href="/type-de-anzan/" id="replay" role="button" class="btn btn-primary btn-lg">もう1度プレイする！</a>
-        </div>
-        <pre id="endAA" class="aa">
-　 n 彡⌒ ミ
-　(ﾖ(｀・ω・´)　もっと練習するんだぜ？
-　　Y 　　　つ
-        </pre>
       </div>
-      <div id="problem" class="problem">
-        <div class="row">
-          <div class="next col coll num">
-            <span class="a"></span><span class="x"></span><span class="b"></span><span class="y"></span><span class="c"></span><span class="z"></span>
+      <div class="col-sm">
+        <div class="alert alert-info text-center">
+          <div class="h5">
+            <label><ruby>時間<rp>(</rp><rt>じかん</rt><rp>)</rp></ruby>:</label>
+            <span id="time" class="ml-1">180秒 / 180秒</span>
           </div>
-          <div class="col colr">
-            <input type="tel" class="form-control num pred" maxlength="3">
-          </div>
+          <button onclick="countdown()" type="button" class="btn btn-primary btn-lg">スタート</button>
         </div>
       </div>
     </div>
-    <div>
-      <span id="timer" class="btn btn-info">現在の時間: <span id="lap">0</span>秒</span>
+    <div class="d-flex flex-wrap justify-content-center p-md-5">
+      <div class="pb-3">
+        <span id="num" class="num px-2 pb-4 text-center">114＋514＝</span>
+        <span id="reply" data-answer='628' class="d-inline-block num"></span>
+      </div>
+      <div class="px-4 text-center">
+        <div class="pb-1">
+          <button id="b1" class="btn btn-secondary calc">1</button>
+          <button id="b2" class="btn btn-secondary calc">2</button>
+          <button id="b3" class="btn btn-secondary calc">3</button>
+          <button id="be" class="btn btn-secondary calc">&gt;</button>
+        </div>
+        <div class="pb-1">
+          <button id="b4" class="btn btn-secondary calc">4</button>
+          <button id="b5" class="btn btn-secondary calc">5</button>
+          <button id="b6" class="btn btn-secondary calc">6</button>
+          <button id="bc" class="btn btn-secondary calc">C</button>
+        </div>
+        <div class="pb-1">
+          <button id="b7" class="btn btn-secondary calc">7</button>
+          <button id="b8" class="btn btn-secondary calc">8</button>
+          <button id="b9" class="btn btn-secondary calc">9</button>
+          <button id="b0" class="btn btn-secondary calc">0</button>
+        </div>
+      </div>
     </div>
   </div>
-  <div id="testEnd">
-  </div>
-  <div id="introduction">
-    <div class="text-center">
-      <pre id="topAA" class="aa">
-　彡 ⌒ ミ
-　(´・ω・`)　　特訓ルームへようこそ！
-　 ０　　０　　　<b>ルールはかんたん！</b>
-　　|　　|　　　　　20門を暗算しよう。
-　　∪∪　　　　　計算ミスはだめだよ。
-      </pre>
-    </div>
-    <div class="text-center">
-      <div class="form-row justify-content-center">
-        <div class="col-auto">
-          <select id="age" class="form-control">
-            <option disabled>学年を選択</option>
-            <option>小学1年</option>
-            <option>小学2年</option>
-            <option>小学3年</option>
-            <option selected>小学4年</option>
-            <option>小学5年</option>
-            <option>小学6年</option>
-            <option>中学生以上</option>
-          </select>
-        </div>
-        <div class="col-auto">
-          <select id="type" class="form-control">
-            <option disabled>問題を選択</option>
-            <option selected>＋ー✕÷</option>
-            <option>＋</option>
-            <option>ー</option>
-            <option>×</option>
-            <option>÷</option>
-          </select>
-        </div>
+  <div class="pt-md-5 d-md-block d-none text-center">
+    <ruby>他<rp>(</rp><rt>ほか</rt><rp>)</rp></ruby>にもいろいろなゲームがあるよ！
+    <div class="text-center d-flex flex-wrap justify-content-center pt-3">
+      <div class="tile">
+        <a href="https://marmooo.github.io/kanji-meiro/">
+          <img alt="カタカナ迷路" src="https://marmooo.github.io/kanji-meiro/favicon/safari-pinned-tab.svg" width="64" height="64" loading="lazy">
+          <br>
+          <small>カタカナ迷路</small>
+        </a>
       </div>
-      <button id="start" type="button" class="btn btn-primary btn-lg">クリックしてスタート！</button>
-      <div id="preview">
-        <p><b>ヒント</b>: 練習をしてみよう。
-        問題文をタップするとスクロールするから早く解けるよ。</p>
-        <div class="problem">
-          <div class="row">
-            <div class="next col coll num">3＋4＝</div>
-            <div class="col colr">
-              <input type="tel" class="form-control num pred" maxlength="3">
-            </div>
-          </div>
-        </div>
-        <div class="problem">
-          <div class="row">
-            <div class="next col coll num">7×8＝</div>
-            <div class="col colr">
-              <input type="tel" class="form-control num pred" maxlength="3">
-            </div>
-          </div>
-        </div>
+      <div class="tile">
+        <a href="https://marmooo.github.io/jukugo3-sagashi/">
+          <img alt="三字熟語さがし" src="https://marmooo.github.io/jukugo3-sagashi/favicon/safari-pinned-tab.svg" width="64" height="64" loading="lazy">
+          <br>
+          <small>三字熟語さがし</small>
+        </a>
       </div>
-      <pre id="hintAA" class="aa">
-ﾅﾆﾅﾆ
-　　　 彡⌒ ミ　ﾅﾆﾅﾆ
-　　　(´･ω･`) 彡⌒ミ
-,彡⌒ 彡⌒ ミ (・ω・｀)　早く解けるよねー
-(´・ω(´･ω･`) ⌒ ミﾉ⌒ミ
-　 ｕ＿|￣￣||´･ω･`)ω・｀) そだねー
-　／旦|――||/／ ／|と ﾉ
-　|￣￣￣￣￣|￣| . |-ｕ
-　|＿＿＿＿＿|三|／
-      </pre>
+      <div class="tile">
+        <a href="https://marmooo.github.io/tegaki-de-anzan/">
+          <img alt="手書きde暗算" src="https://marmooo.github.io/tegaki-de-anzan/favicon/original.svg" width="64" height="64" loading="lazy">
+          <br>
+          <small>手書きde暗算</small>
+        </a>
+      </div>
     </div>
   </div>
 </div>
@@ -281,6 +207,6 @@ o　　o　　　　　　　 彡⌒ミ　　　　採点
   </div>
   <div class="text-muted">&copy; <a href="https://github.com/marmooo">marmooo</a>. All Rights Reserved.</div>
 </footer>
-<script src="index.js"></script>
+<script src="index.js"> </script>
 </body>
 </html>
