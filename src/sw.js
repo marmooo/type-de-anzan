@@ -1,4 +1,4 @@
-var CACHE_NAME = '2020-09-29 10:10';
+var CACHE_NAME = '2020-11-05 22:30';
 var urlsToCache = [
   '/type-de-anzan/',
   '/type-de-anzan/index.js',
@@ -8,7 +8,7 @@ var urlsToCache = [
   'https://marmooo.github.io/fonts/textar-light.woff2',
   'https://marmooo.github.io/fonts/textar-light.woff',
   'https://marmooo.github.io/fonts/textar-light.ttf',
-  'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css',
+  'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css',
 ];
 
 self.addEventListener('install', function(event) {
