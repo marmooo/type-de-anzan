@@ -1,212 +1,212 @@
 <!doctype html>
 <html lang="ja" class="bg-white">
-<head>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-142997649-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142997649-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'UA-142997649-1');
-</script>
-<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>タイプde暗算</title>
-<meta name="description" content="タイピングの暗算練習アプリです。小学生から大人まで楽しめます。">
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('/type-de-anzan/sw.js');
-    });
-  }
-</script>
-<link rel="apple-touch-icon" sizes="180x180" href="/type-de-anzan/favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="48x48" href="/type-de-anzan/favicon/favicon-48x48.png">
-<link rel="manifest" href="/type-de-anzan/favicon/site.webmanifest">
-<link rel="mask-icon" href="/type-de-anzan/favicon/safari-pinned-tab.svg" color="#5bbad5">
-<meta name="apple-mobile-web-app-title" content="タイプde暗算">
-<meta name="application-name" content="タイプde暗算">
-<meta name="msapplication-TileColor" content="#da532c">
-<meta name="theme-color" content="#ffffff">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
-<style>
-.tile { width:84px; padding-bottom:1rem; line-height:1.1rem; }
-@font-face {
-  font-family: textar-light;
-  src: url('https://marmooo.github.io/fonts/textar-light.woff2') format('woff2'),
-    url('https://marmooo.github.io/fonts/textar-light.woff') format('woff'),
-    url('https://marmooo.github.io/fonts/textar-light.ttf') format('ttf');
-  font-display: swap;
-}
-pre.aa {
-  font-size: 1rem;
-  display: inline-block;
-  text-align: left;
-  font-family: textar-light;
-  line-height: 1.1;
-  white-space: pre;
-  word-wrap: normal;
-}
-.eraser { cursor: pointer; }
-#counter {
-  font-size:10rem; width:12rem; height:12rem; line-height:12rem; border-radius: 50%;
-  background:tomato; margin:auto; }
-.num { font-size: 5rem; }
-@media (max-width: 992px) { .num { font-size: 4rem; } }
-@media (max-width: 576px) { .num { font-size: 2rem; } }
-.calc { font-size:2rem; width:4rem; }
-@media (max-width: 768px) and (orientation: landscape) {
-  .num { font-size: 2rem; }
-  .calc { font-size: 1.5rem; width:3rem; }
-}
-#reply { width:2em; }
-html[data-theme="dark"] { filter: invert(1) hue-rotate(180deg) brightness(1.5); }
-</style>
-</head>
-<body>
-<nav id="header" class="navbar navbar-expand">
-  <div class="container">
-    <a class="navbar-brand" href="/type-de-anzan/">
-      タイプde<ruby>暗算<rp>(</rp><rt>あんざん</rt><rp>)</rp></ruby>
-    </a>
-    <div class="navbar-nav">
-      <select id="type" class="form-control form-control-sm">
-        <option selected>全部</option>
-        <option>＋</option>
-        <option>ー</option>
-        <option>×</option>
-        <option>÷</option>
-      </select>
-      <select id="grade" class="ml-1 form-control form-control-sm">
-        <option>小1</option>
-        <option>小2</option>
-        <option>小3</option>
-        <option selected>小4</option>
-        <option>小5</option>
-        <option>小6</option>
-        <option>中学〜</option>
-      </select>
-      <button title="ダークモード切替" onclick="toggleDarkMode()" class="ml-2 close">🌓</button>
-    </div>
-  </div>
-</nav>
-<div class="container mx-md-auto pb-4">
-  <div id="gameStart" class="text-center d-none">
-    <div id="countdown">
-      <div id="counter">3</div>
-      <pre class="aa">
+      gtag('config', 'UA-142997649-1');
+    </script>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>タイプde暗算</title>
+    <meta name="description" content="タイピングの暗算練習アプリです。小学生から大人まで楽しめます。">
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/type-de-anzan/sw.js');
+        });
+      }
+    </script>
+    <link rel="apple-touch-icon" sizes="180x180" href="/type-de-anzan/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/type-de-anzan/favicon/favicon-48x48.png">
+    <link rel="manifest" href="/type-de-anzan/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/type-de-anzan/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="apple-mobile-web-app-title" content="タイプde暗算">
+    <meta name="application-name" content="タイプde暗算">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+    <style>
+      .tile { width:84px; padding-bottom:1rem; line-height:1.1rem; }
+      @font-face {
+        font-family: textar-light;
+        src: url('https://marmooo.github.io/fonts/textar-light.woff2') format('woff2'),
+        url('https://marmooo.github.io/fonts/textar-light.woff') format('woff'),
+        url('https://marmooo.github.io/fonts/textar-light.ttf') format('ttf');
+      font-display: swap;
+      }
+      pre.aa {
+        font-size: 1rem;
+        display: inline-block;
+        text-align: left;
+        font-family: textar-light;
+        line-height: 1.1;
+        white-space: pre;
+        word-wrap: normal;
+      }
+      .eraser { cursor: pointer; }
+      #counter {
+        font-size:10rem; width:12rem; height:12rem; line-height:12rem; border-radius: 50%;
+        background:tomato; margin:auto; }
+      .num { font-size: 5rem; }
+      @media (max-width: 992px) { .num { font-size: 4rem; } }
+      @media (max-width: 576px) { .num { font-size: 2rem; } }
+      .calc { font-size:2rem; width:4rem; }
+      @media (max-width: 768px) and (orientation: landscape) {
+        .num { font-size: 2rem; }
+        .calc { font-size: 1.5rem; width:3rem; }
+      }
+      #reply { width:2em; }
+      html[data-theme="dark"] { filter: invert(1) hue-rotate(180deg) brightness(1.5); }
+    </style>
+  </head>
+  <body>
+    <nav id="header" class="navbar navbar-expand">
+      <div class="container">
+        <a class="navbar-brand" href="/type-de-anzan/">
+          タイプde<ruby>暗算<rp>(</rp><rt>あんざん</rt><rp>)</rp></ruby>
+        </a>
+        <div class="navbar-nav">
+          <select id="type" class="form-control form-control-sm">
+            <option selected>全部</option>
+            <option>＋</option>
+            <option>ー</option>
+            <option>×</option>
+            <option>÷</option>
+          </select>
+          <select id="grade" class="ml-1 form-control form-control-sm">
+            <option>小1</option>
+            <option>小2</option>
+            <option>小3</option>
+            <option selected>小4</option>
+            <option>小5</option>
+            <option>小6</option>
+            <option>中学〜</option>
+          </select>
+          <button title="ダークモード切替" onclick="toggleDarkMode()" class="ml-2 close">🌓</button>
+        </div>
+      </div>
+    </nav>
+    <div class="container mx-md-auto pb-4">
+      <div id="gameStart" class="text-center d-none">
+        <div id="countdown">
+          <div id="counter">3</div>
+          <pre class="aa">
 　　　　::･...　　　　...･::
 　　　　 　''':::･,,･:::'''
 　　　 　∩彡⌒ミ∩
 　　　　　 (´・ω・｀)　パワー
 　　　　　 /　　　ﾉ　　充電中…
 　　　　 　しー-Ｊ
-      </pre>
-    </div>
-  </div>
-  <div id="scorePanel" class="text-center pb-3 d-none">
-    <h3 class="pt-3">
-      <ruby>結果<rp>(</rp><rt>けっか</rt><rp>)</rp></ruby>
-    </h3>
-    <pre class="aa"> n 彡⌒ ミ
+          </pre>
+        </div>
+      </div>
+      <div id="scorePanel" class="text-center pb-3 d-none">
+        <h3 class="pt-3">
+          <ruby>結果<rp>(</rp><rt>けっか</rt><rp>)</rp></ruby>
+        </h3>
+        <pre class="aa"> n 彡⌒ ミ
 (ﾖ(｀・ω・´)　クリアしたのは・・・
 　Y 　　　つ</pre>
-    <div class="h2 pb-3">
-      <span id="score" class="h1">0</span>
-      <ruby>問<rp>(</rp><rt>もん</rt><rp>)</rp></ruby>！
-    </div>
-    <a id="twitter" target="_blank" href="https://twitter.com/intent/tweet?text=タイプde暗算で遊んだよ!&url=https%3a%2f%2fmarmooo.github.com/type-de-anzan%2f&hashtags=タイプde暗算" class="btn btn-primary btn-lg m-1" role="button">Twitter でつぶやく</a>
-    <button onclick="countdown()" type="button" class="btn btn-primary btn-lg m-1">リスタート</button>
-  </div>
-  <div id="playPanel">
-    <div class="row">
-      <div class="col-sm">
-        <div id="introduction" class="d-flex">
-          <div>
+        <div class="h2 pb-3">
+          <span id="score" class="h1">0</span>
+          <ruby>問<rp>(</rp><rt>もん</rt><rp>)</rp></ruby>！
+        </div>
+        <a id="twitter" target="_blank" href="https://twitter.com/intent/tweet?text=タイプde暗算で遊んだよ!&url=https%3a%2f%2fmarmooo.github.com/type-de-anzan%2f&hashtags=タイプde暗算" class="btn btn-primary btn-lg m-1" role="button">Twitter でつぶやく</a>
+        <button onclick="countdown()" type="button" class="btn btn-primary btn-lg m-1">リスタート</button>
+      </div>
+      <div id="playPanel">
+        <div class="row">
+          <div class="col-sm">
+            <div id="introduction" class="d-flex">
+              <div>
 
-            <pre class="aa">　彡 ⌒ ミ
+                <pre class="aa">　彡 ⌒ ミ
 　(´・ω・`)
 　 ０　　０
 　　∪∪</pre>
+              </div>
+              <div class="ml-2">
+                3<ruby>分<rp>(</rp><rt>ふん</rt><rp>)</rp></ruby>でどれくらい<ruby>解<rp>(</rp><rt>と</rt><rp>)</rp></ruby>けるかな？
+              </div>
+            </div>
           </div>
-          <div class="ml-2">
-            3<ruby>分<rp>(</rp><rt>ふん</rt><rp>)</rp></ruby>でどれくらい<ruby>解<rp>(</rp><rt>と</rt><rp>)</rp></ruby>けるかな？
+          <div class="col-sm">
+            <div class="alert alert-info text-center">
+              <div class="h5">
+                <label><ruby>時間<rp>(</rp><rt>じかん</rt><rp>)</rp></ruby>:</label>
+                <span id="time" class="ml-1">180秒 / 180秒</span>
+              </div>
+              <button onclick="countdown()" type="button" class="btn btn-primary btn-lg">スタート</button>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center p-md-5">
+          <div class="pb-3">
+            <span id="num" class="num px-2 pb-4 text-center">114＋514＝</span>
+            <span id="reply" data-answer='628' class="d-inline-block num"></span>
+          </div>
+          <div class="px-4 text-center">
+            <div class="pb-1">
+              <button id="b1" class="btn btn-secondary calc">1</button>
+              <button id="b2" class="btn btn-secondary calc">2</button>
+              <button id="b3" class="btn btn-secondary calc">3</button>
+              <button id="be" class="btn btn-secondary calc">&gt;</button>
+            </div>
+            <div class="pb-1">
+              <button id="b4" class="btn btn-secondary calc">4</button>
+              <button id="b5" class="btn btn-secondary calc">5</button>
+              <button id="b6" class="btn btn-secondary calc">6</button>
+              <button id="bc" class="btn btn-secondary calc">C</button>
+            </div>
+            <div class="pb-1">
+              <button id="b7" class="btn btn-secondary calc">7</button>
+              <button id="b8" class="btn btn-secondary calc">8</button>
+              <button id="b9" class="btn btn-secondary calc">9</button>
+              <button id="b0" class="btn btn-secondary calc">0</button>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-sm">
-        <div class="alert alert-info text-center">
-          <div class="h5">
-            <label><ruby>時間<rp>(</rp><rt>じかん</rt><rp>)</rp></ruby>:</label>
-            <span id="time" class="ml-1">180秒 / 180秒</span>
+      <div class="pt-md-5 d-md-block d-none text-center">
+        <ruby>他<rp>(</rp><rt>ほか</rt><rp>)</rp></ruby>にもいろいろなゲームがあるよ！
+        <div class="text-center d-flex flex-wrap justify-content-center pt-3">
+          <div class="tile">
+            <a href="https://marmooo.github.io/kanji-meiro/">
+              <img alt="カタカナ迷路" src="https://marmooo.github.io/kanji-meiro/favicon/safari-pinned-tab.svg" width="64" height="64" loading="lazy">
+              <br>
+              <small>カタカナ迷路</small>
+            </a>
           </div>
-          <button onclick="countdown()" type="button" class="btn btn-primary btn-lg">スタート</button>
+          <div class="tile">
+            <a href="https://marmooo.github.io/jukugo3-sagashi/">
+              <img alt="三字熟語さがし" src="https://marmooo.github.io/jukugo3-sagashi/favicon/safari-pinned-tab.svg" width="64" height="64" loading="lazy">
+              <br>
+              <small>三字熟語さがし</small>
+            </a>
+          </div>
+          <div class="tile">
+            <a href="https://marmooo.github.io/tegaki-de-anzan/">
+              <img alt="手書きde暗算" src="https://marmooo.github.io/tegaki-de-anzan/favicon/original.svg" width="64" height="64" loading="lazy">
+              <br>
+              <small>手書きde暗算</small>
+            </a>
+          </div>
         </div>
       </div>
     </div>
-    <div class="d-flex flex-wrap justify-content-center p-md-5">
-      <div class="pb-3">
-        <span id="num" class="num px-2 pb-4 text-center">114＋514＝</span>
-        <span id="reply" data-answer='628' class="d-inline-block num"></span>
+    <footer class="pt-4 alert text-center">
+      <div>
+        <a class="px-1" href="/">Home</a>
+        <a class="px-1" href="/terms/">Terms</a>
+        <a class="px-1" href="https://github.com/marmooo/type-de-anzan">Contact</a>
       </div>
-      <div class="px-4 text-center">
-        <div class="pb-1">
-          <button id="b1" class="btn btn-secondary calc">1</button>
-          <button id="b2" class="btn btn-secondary calc">2</button>
-          <button id="b3" class="btn btn-secondary calc">3</button>
-          <button id="be" class="btn btn-secondary calc">&gt;</button>
-        </div>
-        <div class="pb-1">
-          <button id="b4" class="btn btn-secondary calc">4</button>
-          <button id="b5" class="btn btn-secondary calc">5</button>
-          <button id="b6" class="btn btn-secondary calc">6</button>
-          <button id="bc" class="btn btn-secondary calc">C</button>
-        </div>
-        <div class="pb-1">
-          <button id="b7" class="btn btn-secondary calc">7</button>
-          <button id="b8" class="btn btn-secondary calc">8</button>
-          <button id="b9" class="btn btn-secondary calc">9</button>
-          <button id="b0" class="btn btn-secondary calc">0</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="pt-md-5 d-md-block d-none text-center">
-    <ruby>他<rp>(</rp><rt>ほか</rt><rp>)</rp></ruby>にもいろいろなゲームがあるよ！
-    <div class="text-center d-flex flex-wrap justify-content-center pt-3">
-      <div class="tile">
-        <a href="https://marmooo.github.io/kanji-meiro/">
-          <img alt="カタカナ迷路" src="https://marmooo.github.io/kanji-meiro/favicon/safari-pinned-tab.svg" width="64" height="64" loading="lazy">
-          <br>
-          <small>カタカナ迷路</small>
-        </a>
-      </div>
-      <div class="tile">
-        <a href="https://marmooo.github.io/jukugo3-sagashi/">
-          <img alt="三字熟語さがし" src="https://marmooo.github.io/jukugo3-sagashi/favicon/safari-pinned-tab.svg" width="64" height="64" loading="lazy">
-          <br>
-          <small>三字熟語さがし</small>
-        </a>
-      </div>
-      <div class="tile">
-        <a href="https://marmooo.github.io/tegaki-de-anzan/">
-          <img alt="手書きde暗算" src="https://marmooo.github.io/tegaki-de-anzan/favicon/original.svg" width="64" height="64" loading="lazy">
-          <br>
-          <small>手書きde暗算</small>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-<footer class="pt-4 alert text-center">
-  <div>
-    <a class="px-1" href="/">Home</a>
-    <a class="px-1" href="/terms/">Terms</a>
-    <a class="px-1" href="https://github.com/marmooo/type-de-anzan">Contact</a>
-  </div>
-  <div class="text-muted">&copy; <a href="https://github.com/marmooo">marmooo</a>. All Rights Reserved.</div>
-</footer>
-<script src="index.js"> </script>
-</body>
+      <div class="text-muted">&copy; <a href="https://github.com/marmooo">marmooo</a>. All Rights Reserved.</div>
+    </footer>
+    <script src="index.js"> </script>
+  </body>
 </html>
