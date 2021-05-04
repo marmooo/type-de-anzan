@@ -6,8 +6,6 @@ var urlsToCache = [
   '/type-de-anzan/mp3/end.mp3',
   '/type-de-anzan/mp3/correct3.mp3',
   'https://marmooo.github.io/fonts/textar-light.woff2',
-  'https://marmooo.github.io/fonts/textar-light.woff',
-  'https://marmooo.github.io/fonts/textar-light.ttf',
   'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css',
 ];
 
