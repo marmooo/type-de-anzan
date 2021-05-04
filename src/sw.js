@@ -1,4 +1,4 @@
-var CACHE_NAME = '2020-11-23 11:30';
+var CACHE_NAME = '2021-05-04 08:30';
 var urlsToCache = [
   '/type-de-anzan/',
   '/type-de-anzan/index.js',
@@ -6,7 +6,7 @@ var urlsToCache = [
   '/type-de-anzan/mp3/end.mp3',
   '/type-de-anzan/mp3/correct3.mp3',
   'https://marmooo.github.io/fonts/textar-light.woff2',
-  'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css',
+  'https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css',
 ];
 
 self.addEventListener('install', function(event) {
