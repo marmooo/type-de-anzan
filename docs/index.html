@@ -14,7 +14,7 @@ gtag('js',new Date());gtag('config','UA-142997649-1');</script><meta charset=utf
 <option>小5
 <option>小6
 <option>中学〜</select>
-<button title=ダークモード切替 onclick=toggleDarkMode() class="fs-4 btn p-0 ms-1">🌓</button></div></div></nav></header><main class="container mx-md-auto pb-4"><div id=gameStart class="text-center d-none"><div id=countdown><div id=counter>3</div><pre class=aa>
+<button title=ダークモード切替 id=toggleDarkMode class="fs-4 btn p-0 ms-1">🌓</button></div></div></nav></header><main class="container mx-md-auto pb-4"><div id=gameStart class="text-center d-none"><div id=countdown><div id=counter>3</div><pre class=aa>
 　　　　::･...　　　　...･::
 　　　　 　''':::･,,･:::'''
 　　　 　∩彡⌒ミ∩
@@ -25,11 +25,11 @@ gtag('js',new Date());gtag('config','UA-142997649-1');</script><meta charset=utf
 (ﾖ(｀・ω・´)　クリアしたのは・・・
 　Y 　　　つ</pre><div class="h2 pb-3"><span id=score class=h1>0</span>
 <ruby>問<rp>(<rt>もん<rp>)</ruby>！</div><a id=twitter target=_blank href="https://twitter.com/intent/tweet?text=タイプde暗算で遊んだよ!&url=https%3a%2f%2fmarmooo.github.com/type-de-anzan%2f&hashtags=タイプde暗算" class="btn btn-primary btn-lg m-1" role=button>Twitter でつぶやく</a>
-<button onclick=countdown() type=button class="btn btn-primary btn-lg m-1">リスタート</button></div><div id=playPanel><div class=row><div class=col-sm><div id=introduction class=d-flex><div><pre class=aa>　彡 ⌒ ミ
+<button id=restartButton type=button class="btn btn-primary btn-lg m-1">リスタート</button></div><div id=infoPanel><div class=row><div class=col-sm><div id=introduction class=d-flex><div><pre class=aa>　彡 ⌒ ミ
 　(´・ω・`)
 　 ０　　０
 　　∪∪</pre></div><div class=ms-2>3<ruby>分<rp>(<rt>ふん<rp>)</ruby>でどれくらい<ruby>解<rp>(<rt>と<rp>)</ruby>けるかな？</div></div></div><div class=col-sm><div class="alert alert-info text-center"><div class=h5><label><ruby>時間<rp>(<rt>じかん<rp>)</ruby>:</label>
-<span id=time class=ms-1>180秒 / 180秒</span></div><button onclick=countdown() type=button class="btn btn-primary btn-lg">スタート</button></div></div></div><div class="d-flex flex-wrap justify-content-center p-md-5"><div class=pb-3><span id=num class="num px-2 pb-4 text-center">114＋514＝</span>
+<span id=time class=ms-1>180秒 / 180秒</span></div><button id=startButton type=button class="btn btn-primary btn-lg">スタート</button></div></div></div><div class="d-flex flex-wrap justify-content-center p-md-5"><div class=pb-3><span id=num class="num px-2 pb-4 text-center">114＋514＝</span>
 <span id=reply data-answer=628 class="d-inline-block num"></span></div><div class="px-4 text-center"><div class=pb-1><button id=b1 class="btn btn-secondary calc">1</button>
 <button id=b2 class="btn btn-secondary calc">2</button>
 <button id=b3 class="btn btn-secondary calc">3</button>
