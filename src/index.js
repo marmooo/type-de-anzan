@@ -1,3 +1,4 @@
+let hinted = false;
 const infoPanel = document.getElementById("infoPanel");
 const scorePanel = document.getElementById("scorePanel");
 let endAudio, incorrectAudio, correctAudio;
@@ -89,6 +90,7 @@ function getNumRange(grade) {
 }
 
 function generateData() {
+  hinted = false;
   const grade = document.getElementById("gradeOption").selectedIndex + 1;
   const course = document.getElementById("courseOption").selectedIndex - 1;
   const range = getNumRange(grade);
@@ -185,15 +187,10 @@ function initCalc() {
   const replyObj = document.getElementById("reply");
   const scoreObj = document.getElementById("score");
   document.getElementById("be").onclick = function () {
-    const reply = replyObj.innerText;
-    const answer = replyObj.dataset.answer;
-    if (answer == reply) {
-      playAudio(correctAudio);
-      replyObj.innerText = "";
-      scoreObj.innerText = parseInt(scoreObj.innerText) + 1;
-      generateData();
-    } else {
-      playAudio(incorrectAudio);
+    if (!hinted) {
+      hinted = true;
+      const num = document.getElementById("num");
+      num.textContent += replyObj.dataset.answer;
     }
   };
   document.getElementById("bc").onclick = function () {
@@ -211,7 +208,9 @@ function initCalc() {
       if (answer == reply) {
         playAudio(correctAudio);
         replyObj.innerText = "";
-        scoreObj.innerText = parseInt(scoreObj.innerText) + 1;
+        if (!hinted) {
+          scoreObj.innerText = parseInt(scoreObj.innerText) + 1;
+        }
         generateData();
       }
     };
