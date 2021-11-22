@@ -135,7 +135,7 @@ function generateData() {
       console.log("error");
   }
   const num = document.getElementById("num");
-  num.innerText = `${a}${x}${b}＝`;
+  num.textContent = `${a}${x}${b}＝`;
   document.getElementById("reply").dataset.answer = c;
 }
 
@@ -143,12 +143,12 @@ let gameTimer;
 function startGameTimer() {
   clearInterval(gameTimer);
   const timeNode = document.getElementById("time");
-  timeNode.innerText = "180秒 / 180秒";
+  timeNode.textContent = "180秒 / 180秒";
   gameTimer = setInterval(function () {
-    const arr = timeNode.innerText.split("秒 /");
+    const arr = timeNode.textContent.split("秒 /");
     const t = parseInt(arr[0]);
     if (t > 0) {
-      timeNode.innerText = (t - 1) + "秒 /" + arr[1];
+      timeNode.textContent = (t - 1) + "秒 /" + arr[1];
     } else {
       clearInterval(gameTimer);
       playAudio(endAudio);
@@ -165,18 +165,18 @@ function countdown() {
   infoPanel.classList.add("d-none");
   scorePanel.classList.add("d-none");
   const counter = document.getElementById("counter");
-  counter.innerText = 3;
+  counter.textContent = 3;
   countdownTimer = setInterval(function () {
     const colors = ["skyblue", "greenyellow", "violet", "tomato"];
-    if (parseInt(counter.innerText) > 1) {
-      const t = parseInt(counter.innerText) - 1;
+    if (parseInt(counter.textContent) > 1) {
+      const t = parseInt(counter.textContent) - 1;
       counter.style.backgroundColor = colors[t];
-      counter.innerText = t;
+      counter.textContent = t;
     } else {
       clearTimeout(countdownTimer);
       gameStart.classList.add("d-none");
       infoPanel.classList.remove("d-none");
-      document.getElementById("score").innerText = 0;
+      document.getElementById("score").textContent = 0;
       generateData();
       startGameTimer();
     }
@@ -194,22 +194,22 @@ function initCalc() {
     }
   };
   document.getElementById("bc").onclick = function () {
-    replyObj.innerText = "";
+    replyObj.textContent = "";
   };
   for (let i = 0; i < 10; i++) {
     document.getElementById("b" + i).onclick = function () {
-      let reply = replyObj.innerText;
+      let reply = replyObj.textContent;
       reply += this.getAttribute("id").slice(-1);
       if (reply.length > 3) {
         reply = reply.slice(1, 4);
       }
-      replyObj.innerText = reply;
+      replyObj.textContent = reply;
       const answer = replyObj.dataset.answer;
       if (answer == reply) {
         playAudio(correctAudio);
-        replyObj.innerText = "";
+        replyObj.textContent = "";
         if (!hinted) {
-          scoreObj.innerText = parseInt(scoreObj.innerText) + 1;
+          scoreObj.textContent = parseInt(scoreObj.textContent) + 1;
         }
         generateData();
       }
