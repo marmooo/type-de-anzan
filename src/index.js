@@ -1,5 +1,6 @@
 let hinted = false;
 const infoPanel = document.getElementById("infoPanel");
+const playPanel = document.getElementById("playPanel");
 const scorePanel = document.getElementById("scorePanel");
 let endAudio, incorrectAudio, correctAudio;
 loadAudios();
@@ -189,9 +190,15 @@ function initCalc() {
   document.getElementById("be").onclick = function () {
     if (!hinted) {
       hinted = true;
-      const num = document.getElementById("num");
-      num.textContent += replyObj.dataset.answer;
+      replyObj.textContent = replyObj.dataset.answer;
     }
+    playPanel.style.pointerEvents = "none";
+    playAudio(incorrectAudio);
+    setTimeout(() => {
+      replyObj.textContent = "";
+      generateData();
+      playPanel.style.pointerEvents = "auto";
+    }, 3000);
   };
   document.getElementById("bc").onclick = function () {
     replyObj.textContent = "";
