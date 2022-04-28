@@ -1,11 +1,11 @@
-var CACHE_NAME = '2022-03-28 20:30';
+var CACHE_NAME = "2022-04-29 00:05";
 var urlsToCache = [
   "/type-de-anzan/",
   "/type-de-anzan/index.js",
   "/type-de-anzan/mp3/incorrect1.mp3",
   "/type-de-anzan/mp3/end.mp3",
   "/type-de-anzan/mp3/correct3.mp3",
-  "/type-de-anzan/favicon/original.svg",
+  "/type-de-anzan/favicon/favicon.svg",
   "https://marmooo.github.io/fonts/textar-light.woff2",
   "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css",
 ];
