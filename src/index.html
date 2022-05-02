@@ -55,13 +55,12 @@
         background:tomato; margin:auto; }
       .num { font-size: 5rem; }
       @media (max-width: 992px) { .num { font-size: 4rem; } }
-      @media (max-width: 576px) { .num { font-size: 2rem; } }
+      @media (max-width: 576px) { .num { font-size: 3rem; } }
       .calc { font-size:2rem; width:4rem; }
       @media (max-width: 768px) and (orientation: landscape) {
         .num { font-size: 2rem; }
         .calc { font-size: 1.5rem; width:3rem; }
       }
-      #reply { width:2em; }
       html[data-theme="dark"] { filter: invert(1) hue-rotate(180deg); }
       @-moz-document url-prefix() { html[data-theme="dark"] { background-color:black; } }
     </style>
@@ -89,7 +88,8 @@
               <option selected>小4</option>
               <option>小5</option>
               <option>小6</option>
-              <option>中学〜</option>
+              <option>中学</option>
+              <option>大人</option>
             </select>
             <button title="ダークモード切替" id="toggleDarkMode" class="fs-4 btn p-0 ms-1">🌓</button>
           </div>
@@ -124,7 +124,7 @@
           <span id="score" class="h1">0</span>
           <ruby>問<rp>(</rp><rt>もん</rt><rp>)</rp></ruby>！
         </div>
-        <a id="twitter" target="_blank" href="https://twitter.com/intent/tweet?text=タイプde暗算で遊んだよ!&url=https%3a%2f%2fmarmooo.github.com/type-de-anzan%2f&hashtags=タイプde暗算" class="btn btn-primary btn-lg m-1" role="button">Twitter でつぶやく</a>
+        <a id="twitter" target="_blank" href="https://twitter.com/intent/tweet?text=タイプde暗算で遊んだよ!&url=https%3a%2f%2fmarmooo.github.com/type-de-anzan/%2f&hashtags=タイプde暗算" class="btn btn-primary btn-lg m-1" role="button">Twitter でつぶやく</a>
         <button id="restartButton" type="button" class="btn btn-primary btn-lg m-1">リスタート</button>
       </div>
       <div id="infoPanel">
@@ -153,12 +153,12 @@
             </div>
           </div>
         </div>
-        <div id="playPanel" class="d-flex flex-wrap justify-content-center py-3">
-          <div class="pb-3">
-            <span id="num" class="num px-2 pb-4 text-center">114＋514＝</span>
-            <span id="reply" data-answer='628' class="d-inline-block num"></span>
+        <div id="playPanel" class="row">
+          <div class="col-sm text-center text-sm-end pb-4">
+            <span id="num" class="num px-2">114＋514＝</span>
+            <span id="reply" data-answer="628" class="num"></span>
           </div>
-          <div class="text-center">
+          <div class="col-sm pb-4">
             <div class="pb-1">
               <button id="b1" class="btn btn-secondary calc">1</button>
               <button id="b2" class="btn btn-secondary calc">2</button>

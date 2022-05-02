@@ -85,8 +85,10 @@ function getNumRange(grade) {
       return [99, 50, 99, 50, 16, 4, 20, 6];
     case 6:
       return [99, 50, 99, 50, 14, 6, 20, 8];
-    default:
+    case 7:
       return [388, 111, 388, 111, 12, 8, 20, 11];
+    default:
+      return [8888, 1111, 8888, 1111, 88, 11, 88, 11];
   }
 }
 
@@ -207,8 +209,8 @@ function initCalc() {
     document.getElementById("b" + i).onclick = function () {
       let reply = replyObj.textContent;
       reply += this.getAttribute("id").slice(-1);
-      if (reply.length > 3) {
-        reply = reply.slice(1, 4);
+      if (reply.length > 6) {
+        reply = reply.slice(1, 7);
       }
       replyObj.textContent = reply;
       const answer = replyObj.dataset.answer;
