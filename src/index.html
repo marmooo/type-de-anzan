@@ -71,15 +71,15 @@
         <div class="container flex-wrap">
           <a class="navbar-brand" href="/type-de-anzan/">
             <img src="/type-de-anzan/favicon/favicon.svg" width="32" height="32">
-            タイプde<ruby>暗算<rp>(</rp><rt>あんざん</rt><rp>)</rp></ruby>
+            タイプde暗算
           </a>
           <div class="navbar-nav">
             <select id="courseOption" class="form-select form-select-sm" aria-label="コース">
               <option selected>全部</option>
-              <option>＋</option>
-              <option>ー</option>
-              <option>×</option>
-              <option>÷</option>
+              <option class="notranslate">＋</option>
+              <option class="notranslate">ー</option>
+              <option class="notranslate">×</option>
+              <option class="notranslate">÷</option>
             </select>
             <select id="gradeOption" class="form-select form-select-sm ms-1" aria-label="学年">
               <option>小1</option>
@@ -100,60 +100,35 @@
       <noscript>
         <div class="alert alert-warning">JavaScript を ON にしてください</div>
       </noscript>
-      <div id="gameStart" class="text-center d-none">
-        <div id="countdown">
-          <div id="counter">3</div>
-          <pre class="aa">
-　　　　::･...　　　　...･::
-　　　　 　''':::･,,･:::'''
-　　　 　∩彡⌒ミ∩
-　　　　　 (´・ω・｀)　パワー
-　　　　　 /　　　ﾉ　　充電中…
-　　　　 　しー-Ｊ
-          </pre>
-        </div>
-      </div>
-      <div id="scorePanel" class="text-center pb-3 d-none">
-        <h3 class="pt-3">
-          <ruby>結果<rp>(</rp><rt>けっか</rt><rp>)</rp></ruby>
-        </h3>
-        <pre class="aa"> n 彡⌒ ミ
-(ﾖ(｀・ω・´)　クリアしたのは・・・
-　Y 　　　つ</pre>
-        <div class="h2 pb-3">
-          <span id="score" class="h1">0</span>
-          <ruby>問<rp>(</rp><rt>もん</rt><rp>)</rp></ruby>！
-        </div>
-        <a id="twitter" target="_blank" href="https://twitter.com/intent/tweet?text=タイプde暗算で遊んだよ!&url=https%3a%2f%2fmarmooo.github.com/type-de-anzan/%2f&hashtags=タイプde暗算" class="btn btn-primary btn-lg m-1" role="button">Twitter でつぶやく</a>
-        <button id="restartButton" type="button" class="btn btn-primary btn-lg m-1">リスタート</button>
-      </div>
       <div id="infoPanel">
         <div class="row">
-          <div class="col-sm">
+          <div class="col-md">
             <div id="introduction" class="d-flex">
-              <div>
+              <div class="notranslate">
 
                 <pre class="aa">　彡 ⌒ ミ
 　(´・ω・`)
 　 ０　　０
 　　∪∪</pre>
               </div>
-              <div class="ms-2">
-                3<ruby>分<rp>(</rp><rt>ふん</rt><rp>)</rp></ruby>でどれくらい<ruby>解<rp>(</rp><rt>と</rt><rp>)</rp></ruby>けるかな？
-              </div>
+              <div class="ps-2">3分でどれくらい解けるかな？</div>
             </div>
           </div>
-          <div class="col-sm">
-            <div class="alert alert-info text-center">
-              <div class="h5">
-                <label><ruby>時間<rp>(</rp><rt>じかん</rt><rp>)</rp></ruby>:</label>
-                <span id="time" class="ms-1">180秒 / 180秒</span>
+          <div id="timePanel" class="col-md text-center">
+            <div class="alert alert-info">
+              <div class="d-flex flex-wrap justify-content-center">
+                <div class="h5 text-nowrap notranslate">
+                  <span id="time">180</span>
+                  <span> / 180 sec</span>
+                </div>
               </div>
-              <button id="startButton" type="button" class="btn btn-primary btn-lg">スタート</button>
+              <div class="mt-2">
+                <button id="startButton" class="btn btn-primary btn-lg">スタート</button>
+              </div>
             </div>
           </div>
         </div>
-        <div id="playPanel" class="row">
+        <div id="playPanel" class="row notranslate">
           <div class="col-sm text-center text-sm-end pb-4">
             <span id="num" class="num px-2">114＋514＝</span>
             <span id="reply" data-answer="628" class="num"></span>
@@ -180,8 +155,37 @@
           </div>
         </div>
       </div>
+      <div id="countPanel" class="text-center d-none notranslate">
+        <div id="countdown">
+          <div id="counter">3</div>
+          <pre class="aa">
+　　　　::･...　　　　...･::
+　　　　 　''':::･,,･:::'''
+　　　 　∩彡⌒ミ∩
+　　　　　 (´・ω・｀)　パワー
+　　　　　 /　　　ﾉ　　充電中…
+　　　　 　しー-Ｊ
+          </pre>
+        </div>
+      </div>
+      <div id="scorePanel" class="text-center pb-3 d-none">
+        <h3 class="pt-3">スコア</h3>
+        <div class="d-flex justify-content-center">
+          <div class="notranslate">
+            <pre class="aa"> n 彡⌒ ミ
+(ﾖ(｀・ω・´)
+　Y 　　　つ</pre>
+          </div>
+          <div>クリアしたのは・・・</div>
+        </div>
+        <div class="h2 pb-3 notranslate">
+          <span id="score" class="h1">0</span>
+        </div>
+        <a id="twitter" target="_blank" href="https://twitter.com/intent/tweet?text=タイプde暗算で遊んだよ!&url=https%3a%2f%2fmarmooo.github.com/type-de-anzan/%2f&hashtags=タイプde暗算" class="btn btn-primary btn-lg" role="button">Twitter でつぶやく</a>
+        <button id="restartButton" type="button" class="btn btn-primary btn-lg">リスタート</button>
+      </div>
       <div class="pt-3 d-md-block d-none text-center">
-        <ruby>他<rp>(</rp><rt>ほか</rt><rp>)</rp></ruby>にもいろいろなゲームがあるよ！
+        他にもいろいろなゲームがあるよ！
         <div class="text-center d-flex flex-wrap justify-content-center pt-3">
           <div class="tile">
             <a href="https://marmooo.github.io/kanji-meiro/">

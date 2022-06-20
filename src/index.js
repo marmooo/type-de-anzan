@@ -1,7 +1,9 @@
 let hinted = false;
+const countPanel = document.getElementById("countPanel");
 const infoPanel = document.getElementById("infoPanel");
 const playPanel = document.getElementById("playPanel");
 const scorePanel = document.getElementById("scorePanel");
+const gameTime = 180;
 let endAudio, incorrectAudio, correctAudio;
 loadAudios();
 const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -146,12 +148,11 @@ let gameTimer;
 function startGameTimer() {
   clearInterval(gameTimer);
   const timeNode = document.getElementById("time");
-  timeNode.textContent = "180秒 / 180秒";
-  gameTimer = setInterval(function () {
-    const arr = timeNode.textContent.split("秒 /");
-    const t = parseInt(arr[0]);
+  initTime();
+  gameTimer = setInterval(() => {
+    const t = parseInt(timeNode.textContent);
     if (t > 0) {
-      timeNode.textContent = (t - 1) + "秒 /" + arr[1];
+      timeNode.textContent = t - 1;
     } else {
       clearInterval(gameTimer);
       playAudio(endAudio);
@@ -161,15 +162,19 @@ function startGameTimer() {
   }, 1000);
 }
 
+function initTime() {
+  document.getElementById("time").textContent = gameTime;
+}
+
 let countdownTimer;
 function countdown() {
   clearTimeout(countdownTimer);
-  gameStart.classList.remove("d-none");
+  countPanel.classList.remove("d-none");
   infoPanel.classList.add("d-none");
   scorePanel.classList.add("d-none");
   const counter = document.getElementById("counter");
   counter.textContent = 3;
-  countdownTimer = setInterval(function () {
+  countdownTimer = setInterval(() => {
     const colors = ["skyblue", "greenyellow", "violet", "tomato"];
     if (parseInt(counter.textContent) > 1) {
       const t = parseInt(counter.textContent) - 1;
@@ -177,7 +182,7 @@ function countdown() {
       counter.textContent = t;
     } else {
       clearTimeout(countdownTimer);
-      gameStart.classList.add("d-none");
+      countPanel.classList.add("d-none");
       infoPanel.classList.remove("d-none");
       document.getElementById("score").textContent = 0;
       generateData();
@@ -189,7 +194,7 @@ function countdown() {
 function initCalc() {
   const replyObj = document.getElementById("reply");
   const scoreObj = document.getElementById("score");
-  document.getElementById("be").onclick = function () {
+  document.getElementById("be").onclick = () => {
     if (!hinted) {
       hinted = true;
       replyObj.textContent = replyObj.dataset.answer;
@@ -202,13 +207,13 @@ function initCalc() {
       playPanel.style.pointerEvents = "auto";
     }, 3000);
   };
-  document.getElementById("bc").onclick = function () {
+  document.getElementById("bc").onclick = () => {
     replyObj.textContent = "";
   };
   for (let i = 0; i < 10; i++) {
-    document.getElementById("b" + i).onclick = function () {
+    document.getElementById("b" + i).onclick = (event) => {
       let reply = replyObj.textContent;
-      reply += this.getAttribute("id").slice(-1);
+      reply += event.target.getAttribute("id").slice(-1);
       if (reply.length > 6) {
         reply = reply.slice(1, 7);
       }
