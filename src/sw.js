@@ -1,4 +1,4 @@
-var CACHE_NAME = "2022-09-11 08:49";
+var CACHE_NAME = "2022-10-05 00:05";
 var urlsToCache = [
   "/type-de-anzan/",
   "/type-de-anzan/index.js",
