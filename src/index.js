@@ -1,9 +1,11 @@
-let hinted = false;
 const countPanel = document.getElementById("countPanel");
 const infoPanel = document.getElementById("infoPanel");
 const playPanel = document.getElementById("playPanel");
 const scorePanel = document.getElementById("scorePanel");
 const gameTime = 180;
+let gameTimer;
+let hinted = false;
+let correctCount = 0;
 const audioContext = new AudioContext();
 const audioBufferCache = {};
 loadAudio("end", "mp3/end.mp3");
@@ -128,9 +130,38 @@ function generateData() {
   document.getElementById("reply").dataset.answer = c;
 }
 
-let gameTimer;
-function startGameTimer() {
+function countdown() {
+  correctCount = 0;
+  countPanel.classList.remove("d-none");
+  playPanel.classList.add("d-none");
+  infoPanel.classList.add("d-none");
+  scorePanel.classList.add("d-none");
+  const counter = document.getElementById("counter");
+  counter.textContent = 3;
+  const timer = setInterval(() => {
+    const colors = ["skyblue", "greenyellow", "violet", "tomato"];
+    if (parseInt(counter.textContent) > 1) {
+      const t = parseInt(counter.textContent) - 1;
+      counter.style.backgroundColor = colors[t];
+      counter.textContent = t;
+    } else {
+      clearTimeout(timer);
+      countPanel.classList.add("d-none");
+      playPanel.classList.remove("d-none");
+      infoPanel.classList.remove("d-none");
+      generateData();
+      startGameTimer();
+    }
+  }, 1000);
+}
+
+function startGame() {
   clearInterval(gameTimer);
+  initTime();
+  countdown();
+}
+
+function startGameTimer() {
   const timeNode = document.getElementById("time");
   initTime();
   gameTimer = setInterval(() => {
@@ -140,8 +171,9 @@ function startGameTimer() {
     } else {
       clearInterval(gameTimer);
       playAudio("end");
-      infoPanel.classList.add("d-none");
+      playPanel.classList.add("d-none");
       scorePanel.classList.remove("d-none");
+      scoring();
     }
   }, 1000);
 }
@@ -150,45 +182,21 @@ function initTime() {
   document.getElementById("time").textContent = gameTime;
 }
 
-let countdownTimer;
-function countdown() {
-  clearTimeout(countdownTimer);
-  countPanel.classList.remove("d-none");
-  infoPanel.classList.add("d-none");
-  scorePanel.classList.add("d-none");
-  const counter = document.getElementById("counter");
-  counter.textContent = 3;
-  countdownTimer = setInterval(() => {
-    const colors = ["skyblue", "greenyellow", "violet", "tomato"];
-    if (parseInt(counter.textContent) > 1) {
-      const t = parseInt(counter.textContent) - 1;
-      counter.style.backgroundColor = colors[t];
-      counter.textContent = t;
-    } else {
-      clearTimeout(countdownTimer);
-      countPanel.classList.add("d-none");
-      infoPanel.classList.remove("d-none");
-      document.getElementById("score").textContent = 0;
-      generateData();
-      startGameTimer();
-    }
-  }, 1000);
+function scoring() {
+  document.getElementById("score").textContent = correctCount;
 }
 
 function initCalc() {
   const replyObj = document.getElementById("reply");
-  const scoreObj = document.getElementById("score");
   document.getElementById("be").onclick = () => {
     if (!hinted) {
       hinted = true;
       replyObj.textContent = replyObj.dataset.answer;
     }
-    playPanel.style.pointerEvents = "none";
     playAudio("incorrect");
     setTimeout(() => {
       replyObj.textContent = "";
       generateData();
-      playPanel.style.pointerEvents = "auto";
     }, 3000);
   };
   document.getElementById("bc").onclick = () => {
@@ -207,7 +215,7 @@ function initCalc() {
         playAudio("correct");
         replyObj.textContent = "";
         if (!hinted) {
-          scoreObj.textContent = parseInt(scoreObj.textContent) + 1;
+          correctCount += 1;
         }
         generateData();
       }
@@ -219,8 +227,8 @@ initCalc();
 generateData();
 
 document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
-document.getElementById("startButton").onclick = countdown;
-document.getElementById("restartButton").onclick = countdown;
+document.getElementById("startButton").onclick = startGame;
+document.getElementById("restartButton").onclick = startGame;
 document.addEventListener("click", unlockAudio, {
   once: true,
   useCapture: true,
