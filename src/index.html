@@ -60,8 +60,8 @@
         .num { font-size: 2rem; }
         .calc { font-size: 1.5rem; width:3rem; }
       }
-      html[data-theme="dark"] { filter: invert(1) hue-rotate(180deg); }
-      @-moz-document url-prefix() { html[data-theme="dark"] { background-color:black; } }
+      html[data-bs-theme="dark"] .navbar-brand > img { filter: invert(1) hue-rotate(180deg); }
+      html[data-bs-theme="dark"] .tile img { filter: invert(1) hue-rotate(180deg); }
     </style>
   </head>
   <body>
@@ -156,7 +156,7 @@
       </div>
       <div id="countPanel" class="text-center d-none notranslate">
         <div id="countdown">
-          <div id="counter">3</div>
+          <div id="counter" class="text-dark"></div>
           <pre class="aa">
 　　　　::･...　　　　...･::
 　　　　 　''':::･,,･:::'''
