@@ -193,7 +193,7 @@ function initCalc() {
       hinted = true;
       replyObj.textContent = replyObj.dataset.answer;
     }
-    playAudio("incorrect");
+    playAudio("incorrect", 0.3);
     setTimeout(() => {
       replyObj.textContent = "";
       generateData();
@@ -212,11 +212,9 @@ function initCalc() {
       replyObj.textContent = reply;
       const answer = replyObj.dataset.answer;
       if (answer == reply) {
-        playAudio("correct");
+        playAudio("correct", 0.3);
         replyObj.textContent = "";
-        if (!hinted) {
-          correctCount += 1;
-        }
+        if (!hinted) correctCount += 1;
         generateData();
       }
     };
