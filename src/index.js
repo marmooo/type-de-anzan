@@ -6,7 +6,7 @@ const gameTime = 180;
 let gameTimer;
 let hinted = false;
 let correctCount = 0;
-const audioContext = new AudioContext();
+const audioContext = new globalThis.AudioContext();
 const audioBufferCache = {};
 loadAudio("end", "mp3/end.mp3");
 loadAudio("correct", "mp3/correct3.mp3");
