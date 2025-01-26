@@ -166,7 +166,7 @@ function countdown() {
       counter.style.backgroundColor = colors[t];
       counter.textContent = t;
     } else {
-      clearTimeout(timer);
+      clearInterval(timer);
       countPanel.classList.add("d-none");
       playPanel.classList.remove("d-none");
       infoPanel.classList.remove("d-none");
