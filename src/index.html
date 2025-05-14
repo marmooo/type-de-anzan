@@ -52,14 +52,16 @@
       #counter {
         font-size:10rem; width:12rem; height:12rem; line-height:12rem; border-radius: 50%;
         background:tomato; color:black; margin:auto; }
-      .num { font-size: 5rem; }
-      @media (max-width: 992px) { .num { font-size: 4rem; } }
-      @media (max-width: 576px) { .num { font-size: 3rem; } }
-      .calc { font-size:2rem; width:4rem; }
-      @media (max-width: 768px) and (orientation: landscape) {
-        .num { font-size: 2rem; }
-        .calc { font-size: 1.5rem; width:3rem; }
+      #problem { display: flex; flex-direction: column; text-align: center; }
+      #reply { text-align: end; }
+      .num { font-size: 4rem; height: 4rem; }
+      @media (max-width: 992px) { .num { font-size: 3rem; height: 3rem; } }
+      @media (max-width: 768px) {
+        .num { font-size: 3rem; height: 3rem; text-align: center; }
+        #reply { text-align: center; }
       }
+      .calc { font-size:2rem; width:4rem; }
+      @media (max-width: 768px) { .calc { font-size: 1.5rem; width:3rem; } }
       html[data-bs-theme="dark"] .favicon { filter: invert(1) hue-rotate(180deg); }
     </style>
   </head>
@@ -128,9 +130,9 @@
         </div>
       </div>
       <div id="playPanel" class="row notranslate">
-        <div class="col-md text-center text-md-end pb-4">
-          <span id="num" class="num px-2">114＋514＝</span>
-          <span id="reply" data-answer="628" class="num"></span>
+        <div id="problem" class="col-md lh-1 pb-4">
+          <div id="num" class="num px-2">114＋514＝</div>
+          <div id="reply" data-answer="628" class="num"></div>
         </div>
         <div class="col-md pb-4">
           <div class="text-center">
