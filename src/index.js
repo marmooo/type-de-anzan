@@ -227,8 +227,8 @@ function initCalc() {
     document.getElementById("b" + i).onclick = (event) => {
       let reply = replyObj.textContent;
       reply += event.target.getAttribute("id").slice(-1);
-      if (reply.length > 6) {
-        reply = reply.slice(1, 7);
+      if (reply.length > 5) {
+        reply = reply.slice(1, 6);
       }
       replyObj.textContent = reply;
       const answer = replyObj.dataset.answer;
